@@ -12,9 +12,16 @@ function ensureAutenticated(request, response, next) {
     }
 
     const [, token] = AuthHeader.split(" ");
+    console.log("Token recebido:", token);  // Adicionado este log
+
 
     try {
+
+        console.log("funcion para validar")
         const { sub: user_id } = verify(token, authConfig.jwt.secret);
+
+        console.log("Token validado, ID do usuário:", user_id);  // Adicionado este log
+
         
         request.user = {
             id: Number(user_id),

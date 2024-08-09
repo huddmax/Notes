@@ -26,7 +26,7 @@ export function Profile() {
             old_password: passwordOld,
         }
 
-        console.log("chamei a handle");
+        console.log("chamei a handle!");
 
 
         await updateProfile({ user });
@@ -62,7 +62,7 @@ export function Profile() {
                     type="text"
                     icon={FiUser}
                     value={name}
-                    onChange={e=>setName(e.target.value)}
+                    onChange={ e => setName(e.target.value)}
                 />
 
                 <Input
@@ -70,21 +70,21 @@ export function Profile() {
                     type="text"
                     icon={FiMail}
                     value={email}
-                    onChange={e=>setEmail(e.target.value)}
+                    onChange={ e => setEmail(e.target.value)}
                 />
 
                 <Input
                     placeholder="Senha Atual"
                     type="password"
                     icon={FiLock}
-                    onChange={e=>setpasswordOld(e.target.value)}
+                    onChange={ e => setpasswordOld(e.target.value)}
                 />
 
                 <Input
                     placeholder="Nova Senha"
                     type="password"
                     icon={FiLock}
-                    onChange={e=>setpasswordNew(e.target.value)}
+                    onChange={ e => setpasswordNew(e.target.value)}
                 />
 
                 <Button

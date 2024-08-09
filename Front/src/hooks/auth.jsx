@@ -15,7 +15,8 @@ function AuthProvider({ children }) {
             const { user, token } = response.data;
 
             localStorage.setItem("@rocketnotes:user", JSON.stringify(user));
-            localStorage.setItem("@rocketnotes:token", JSON.stringify(token));
+            // localStorage.setItem("@rocketnotes:token", JSON.stringify(token)); // Esse código antigo tava bugando o JWT!
+            localStorage.setItem("@rocketnotes:token", token); // alteração TESTE -> Essa alteração fez o código funcionar!! Antes o JWT estava com aspas antes e depois do codigo ""
 
             // api.defaults.headers.authorization = `Bearer ${token}`;
             api.defaults.headers.common['Authorization'] = `Bearer ${token}`;
@@ -41,7 +42,10 @@ function AuthProvider({ children }) {
 
     async function updateProfile({ user, avatarFile }) {
     // async function updateProfile({ user }) {
-        console.log("vai rolar o try??")
+        console.log("Iniciando o processo de atualização do usuário...");
+        console.log("Dados do usuário:", user);
+
+
 
         try {
             await api.put("/users", user);
