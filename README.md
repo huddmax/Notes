@@ -21,8 +21,8 @@ Esse projeto visa reunir links úteis em uma página web para acessar facilmente
 
 ## Contato
 
-Você pode me encontrar no LinkedIn: [Hudson Machado](www.linkedin.com/in/hudson-machado-03346024b)
+<a href="www.linkedin.com/in/hudson-machado-03346024b" target="_blank">
+  <img src="https://upload.wikimedia.org/wikipedia/commons/c/ca/LinkedIn_logo_initials.png" alt="LinkedIn" width="24" />
+</a>
 
-
-[![LinkedIn](https://upload.wikimedia.org/wikipedia/commons/c/ca/LinkedIn_logo_initials.png)](www.linkedin.com/in/hudson-machado-03346024b)
 
