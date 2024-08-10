@@ -41,11 +41,15 @@ function AuthProvider({ children }) {
     }
 
     async function updateProfile({ user, avatarFile }) {
-    // async function updateProfile({ user }) {
-        console.log("Iniciando o processo de atualização do usuário...");
-        console.log("Dados do usuário:", user);
+    
 
+        if (avatarFile) {
+            const fileUploadForm = new FormData();
+            fileUploadForm.append("avatar", avatarFile);
 
+            const response = await api.patch("/users/avatar", fileUploadForm);
+            user.avatar = response.data.avatar;
+        }
 
         try {
             await api.put("/users", user);

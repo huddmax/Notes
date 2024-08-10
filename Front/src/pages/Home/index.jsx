@@ -11,6 +11,7 @@ import { ButtonText } from '../../components/ButtonText';
 import { Section } from '../../components/Section';
 
 import { Note } from '../../components/Note';
+import { Link } from 'react-router-dom';
 
 export function Home() {
     return (
@@ -53,9 +54,11 @@ export function Home() {
             </Content>
 
             <NewNote>
-                <FiPlus />
-                Criar Nota
+                <Link to= "/New">
+                    <FiPlus />
+                    Criar Nota
 
+                </Link>
             </NewNote>
 
             

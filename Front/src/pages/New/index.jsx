@@ -1,4 +1,6 @@
 import { Header } from '../../components/Header';
+import { Link } from 'react-router-dom';
+import { useState } from 'react';
 
 import { Container, Form } from './styles';
 
@@ -9,6 +11,28 @@ import { Section } from '../../components/Section';
 import { Button } from '../../components/Button'
 
 export function New() {
+
+    const [links, setLinks] = useState([]);
+    const [newLink, setNewLink] = useState("");
+
+    function handleAddLink() {
+        setLinks(prevState => [...prevState, newLink]);
+        setNewLink("");
+    }
+
+    function handleRemoveLink(deleted) {
+        setLinks(prevState => prevState.filter(link => link !== deleted))
+    }
+
+
+
+
+
+
+
+
+
+
     return (
         <Container>
 
@@ -20,16 +44,34 @@ export function New() {
 
                     <header>
                         <h1>Criar Nota</h1>
-                        <a href="#">voltar</a>
+                        <Link to="/" > voltar</Link>
                     </header>
+                        
 
                     <Input placeholder="Título" />
                     <Textarea placeholder="Observações" />
                     
                     <Section title="Links Úteis" >
+                        {
+                            links.map((link, index) => (
 
-                        <NoteItem value="https://rocketseat.com.br/"/>
-                        <NoteItem isNew placeholder="Novo Link"/>
+                            <NoteItem
+                                key={String(index)}
+                                value={link}
+                                onClick={ ( ) => handleRemoveLink(link) }
+                            />
+                                
+                            ))
+                        }
+                        
+                        <NoteItem
+                            isNew
+                            placeholder="Novo Link"
+                            value={newLink}
+                            onChange={e => setNewLink(e.target.value)}
+                            onClick={handleAddLink}
+                        
+                        />
 
                     </Section>
 

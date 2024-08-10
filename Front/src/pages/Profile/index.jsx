@@ -1,14 +1,18 @@
 import { useState } from "react";
+import { FiArrowLeft, FiUser, FiMail, FiLock, FiCamera } from 'react-icons/fi';
 
 import { useAuth } from "../../hooks/auth";
 
-import { Container } from "./styles";
-import { FiArrowLeft, FiUser, FiMail, FiLock, FiCamera } from 'react-icons/fi';
+import { api } from "../../../../API/src/services/api"
 
-import { Input } from '../../components/Input';
+import avatarPlaceholder from '../../assets/avatar_placeholder.svg';
+
 import { Button } from '../../components/Button';
+import { Input } from '../../components/Input';
+
 import { Form } from './styles';
 import { Avatar } from './styles';
+import { Container } from "./styles";
 
 export function Profile() {
     const { user, updateProfile } = useAuth();
@@ -18,6 +22,11 @@ export function Profile() {
     const [passwordOld, setpasswordOld] = useState();
     const [passwordNew, setpasswordNew] = useState();
 
+    const avatarUrl = user.avatar ? `${api.defaults.baseURL}/files/${user.avatar}` : avatarPlaceholder;
+
+    const [avatar, setAvatar] = useState(avatarUrl);
+    const [avatarFile, setAvatarFile] = useState(null);
+
     async function handleUpdate(){
         const user = {
             name,
@@ -26,10 +35,15 @@ export function Profile() {
             old_password: passwordOld,
         }
 
-        console.log("chamei a handle!");
+        await updateProfile({ user, avatarFile });
+    }
 
+    async function HandleChangeAvatar(event) {
+        const file = event.target.files[0];
+        setAvatarFile(file);
 
-        await updateProfile({ user });
+        const imagePreview = URL.createObjectURL(file);
+        setAvatar(imagePreview);
     }
 
     return (
@@ -43,7 +57,10 @@ export function Profile() {
 
             <Form>
                 <Avatar>
-                    <img src="https://github.com/huddmax.png" alt="foto do usuário" />
+                    <img
+                        src={avatar}
+                        alt="foto do usuário"
+                    />
 
                 <label htmlFor="avatar">
                     <FiCamera />
@@ -51,8 +68,10 @@ export function Profile() {
                     <input
                         id="avatar"
                         type="file"
+                        onChange={HandleChangeAvatar}    
                         
-                        />
+                        
+                    />
 
                 </label>
                         </Avatar>
