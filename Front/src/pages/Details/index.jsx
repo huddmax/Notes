@@ -9,6 +9,7 @@ import { ButtonText } from '../../components/ButtonText/index.jsx';
 import { Section } from '../../components/Section/index.jsx';
 
 import { Tag } from '../../components/Tag/index.jsx';
+import { Link } from 'react-router-dom';
 
 export function Details() {
   
@@ -45,8 +46,9 @@ export function Details() {
         <Tag title="NodeJS" />
 
       </Section>
-
+          {/* <Link> */}
           <Button title='Voltar' />
+          {/* </Link> */}
           
           </Content>
       </main>
