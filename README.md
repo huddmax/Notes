@@ -15,9 +15,16 @@ Esse projeto visa reunir links úteis em uma página web para acessar facilmente
 - Integração entre Front End e Back End
 - Uso de JWT(JSON Web Token) para autenticação dos Usuários
 - Uso de git e gitHub para versionamento de código
-- SQL lite para criação do Banco de Dados dos Usuários
+- SQL para criação do Banco de Dados dos Usuários
 - Criptografia de informações sensíveis no Bando de Dados
 
+### Aprendendo mais sobre algumas ferramentas
+
+- express
+- knex
+- axios
+- cors
+- sqlite
 
 ## Contato
 
