@@ -30,9 +30,6 @@ export function New() {
 
 
 
-
-
-
     return (
         <Container>
 
