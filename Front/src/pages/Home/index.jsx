@@ -17,8 +17,21 @@ import { Link } from 'react-router-dom';
 
 export function Home() {
     const [tags, setTags] = useState([]);
+    const [tagsSelected, setTagsSelected] = useState([]);
 
+    function handleTagSelected(tagName) {
+        const alreadySelected = tagsSelected.includes(tagName);
 
+        if (alreadySelected) {
+            const filteredTags = tagsSelected.filter(tag => tag !== tagName);
+            setTagsSelected(filteredTags);
+        } 
+
+        else {
+
+            setTagsSelected(prevState => [...prevState, tagName])
+        }
+    }
 
     useEffect(() => {
         async function fetchTags() {
@@ -26,6 +39,7 @@ export function Home() {
             setTags(response.data)
         }
 
+        fetchTags()
 
      }, []);
     return (
@@ -39,15 +53,21 @@ export function Home() {
             <Menu>
                 <li><ButtonText
                     title="Todos"
-                    isactive
-                />
+                    onClick = {() => handleTagSelected("all")}
+                    isactive={tagsSelected.length == 0}
+                    />
                 </li>
+
                 {
                     tags && tags.map(tag =>(
-                        <li> key = {String(tag.id)}
-                            <ButtonText
+                        <li
+                        key = {String(tag.id)}
+                        >
+                        <ButtonText
                                 title={tag.name}
-                            />
+                                onClick = {() => handleTagSelected(tag.name)}
+                                isactive = { tagsSelected.includes(tag.name)}
+                        />
                         </li>
                     ))
                 }
