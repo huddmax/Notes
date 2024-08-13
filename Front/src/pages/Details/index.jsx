@@ -1,58 +1,122 @@
 import { Container, Links, Content } from './style.js';
 
+import { useParams, useNavigate } from 'react-router-dom';
+import { useState, useEffect } from 'react';
+
+import { api } from '../../../../API/src/services/api.js'
 import { Header } from '../../components/Header/index.jsx';
-
 import { Button } from '../../components/Button/index.jsx';
-
 import { ButtonText } from '../../components/ButtonText/index.jsx';
-
 import { Section } from '../../components/Section/index.jsx';
-
 import { Tag } from '../../components/Tag/index.jsx';
 import { Link } from 'react-router-dom';
 
 export function Details() {
+  const [data, setData] = useState(null);
+
+  const params = useParams();
+  const navigate = useNavigate();
+
+  function handleBack(){
+    navigate(-1);
+  }
+
+  async function handleRemove() {
+    const confirm = window.confirm("Deseja realmente remover a nota?");
+
+    if (confirm) {
+      await api.delete(`/notes/${params.id}`);
+      navigate(-1);
+    }
+  }
+
+  useEffect(() => { 
+    async function fetchNote() {
+      const response = await api.get(`/notes/${params.id}`);
+      setData(response.data);
+      
+    }
+
+    fetchNote();
+
+  }, []);
   
   return (
     <Container>
 
       <Header></Header>
 
-      <main>
-        <Content>
+      {
+        data &&
+        <main>
+          <Content>
 
         
 
-          <ButtonText title="Excluir Nota"></ButtonText>
+              <ButtonText
+                title="Excluir Nota"
+                onClick={handleRemove}
+
+              />
           
-          <h1>Introdução ao React</h1>
-          <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Id commodi, obcaecati voluptas, temporibus quaerat laboriosam molestiae a amet quisquam autem modi at perspiciatis quasi, dicta consectetur quos expedita dolorum dolores.
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Distinctio, corporis repudiandae fugit illo quia facilis sapiente, recusandae hic inventore aut rerum culpa nihil temporibus iusto asperiores ex ipsa minima laudantium!
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Optio quos nam dolores! Officia reprehenderit alias enim. Dolor delectus enim quasi laboriosam at corporis eaque fugiat nemo, veritatis iste maxime! Atque?
-          </p>
+              <h1>
+                {data.title}
+              </h1>
 
-      <Section title="Utils Links">
+              <p>
+                {data.description}
+              </p>
+
+              {
+                data.links &&
+                <Section title="Utils Links">
        
-        <Links>
-          <li>  <a href="#">https://bitbrother.com.br</a>  </li>
-          <li>  <a href="#">https://bitbrother.com.br</a>  </li>
-        </Links>
+              <Links>
+                  {
+                      data.links.map(link => (
+                      
+                        <li key={String(link.id)}>
+                          <a href={link.url} target="_blank" >
+                            {link.url}
+                          </a>
+                        </li>
+
+                      ))
+                  }
+                
+              </Links>
         
-      </Section>
+            </Section>
+            }
 
-      <Section title="Marcadores">
+              {
+                data.tags &&
+                <Section title="Marcadores">
 
-        <Tag title="Express" />
-        <Tag title="NodeJS" />
+                    {
+                      data.tags.map(tag => (
 
-      </Section>
-          {/* <Link> */}
-          <Button title='Voltar' />
-          {/* </Link> */}
+                        <Tag
+                          key = {String(tag.id)}
+                        title={tag.name}
+                        />
+                      ))
+                    }
+
+              </Section>
+              }
+              
+
+            
+              <Button
+                title='Voltar'
+                onClick= {handleBack}
+              />
+            
           
           </Content>
-      </main>
-      
+        </main>
+      }
     </Container>
   )
 }
