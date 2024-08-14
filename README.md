@@ -1,4 +1,4 @@
-# Useful Links Project
+# Notes - Useful Links Project
 
 **Descrição**
 Este projeto é uma aplicação web que visa reunir links úteis em uma página centralizada, facilitando o acesso rápido e organizado aos seus recursos preferidos.
