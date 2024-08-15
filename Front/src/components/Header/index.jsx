@@ -38,7 +38,7 @@ export function Header() {
             </Profile>
                    
 
-            <Logout onClick={() => {signOut(), navigate("/")}}>
+            <Logout onClick={() => {navigate("/"), signOut()}}>
            <RiShutDownLine/>
             </Logout>
         </Container>
