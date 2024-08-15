@@ -4,7 +4,7 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import { Container, Form } from './styles';
-import { api } from '../../../../API/src/services/api'
+import { api } from '../../services/api'
 
 import { Input } from '../../components/Input';
 import { Textarea } from '../../components/Textarea';

@@ -3,7 +3,7 @@ import avatarPlaceholder from '../../assets/avatar_placeholder.svg';
 import { useNavigate } from 'react-router-dom';
 
 import { useAuth } from '../../hooks/auth';
-import { api } from '../../../../API/src/services/api.js';
+import { api } from '../../services/api.js';
 
 
 import { Container, Profile, Logout } from './style.js';

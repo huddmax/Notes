@@ -6,7 +6,7 @@ import axios from 'axios';
 import { Link, useNavigate } from 'react-router-dom';
 
 // import { api } from '../../../../../API/src/services/api';
-import { api } from '../../../../API/src/services/api';
+import { api } from '../../services/api';
 
 import { FiMail, FiLock, FiUser } from 'react-icons/fi';
 

@@ -3,7 +3,7 @@ import { Container, Links, Content } from './style.js';
 import { useParams, useNavigate } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 
-import { api } from '../../../../API/src/services/api.js'
+import { api } from '../../services/api.js'
 import { Header } from '../../components/Header/index.jsx';
 import { Button } from '../../components/Button/index.jsx';
 import { ButtonText } from '../../components/ButtonText/index.jsx';
