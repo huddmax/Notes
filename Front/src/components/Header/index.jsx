@@ -2,14 +2,12 @@ import { RiShutDownLine } from 'react-icons/ri';
 import avatarPlaceholder from '../../assets/avatar_placeholder.svg';
 import { useNavigate } from 'react-router-dom';
 
-// import
-
 import { useAuth } from '../../hooks/auth';
 import { api } from '../../../../API/src/services/api.js';
 
 
 import { Container, Profile, Logout } from './style.js';
-import { Link } from 'react-router-dom';
+
 
 
 
@@ -26,7 +24,7 @@ export function Header() {
     return (
 
         <Container>
-                {/* <Link to = "/Profile"> */}
+             
             <Profile onClick={navigateToProfile}>
                 <img
                     src={ avatarUrl }
@@ -38,9 +36,9 @@ export function Header() {
                     <strong> { user.name } </strong>
                 </div>
             </Profile>
-                    {/* </Link> */}
+                   
 
-            <Logout onClick={signOut}>
+            <Logout onClick={() => {signOut(), navigate("/")}}>
            <RiShutDownLine/>
             </Logout>
         </Container>
