@@ -1,4 +1,5 @@
 require("express-async-errors");
+require('dotenv/config');
 
 const migrationsRun = require("./database/sqlite/migrations");
 const AppError = require("./utils/AppError");
@@ -12,7 +13,6 @@ migrationsRun();
 
 const app = express();
 app.use(cors());
-// coloquei isso pro Insomnia entender que estamos mandando em JSON pra ela
 app.use(express.json());
 app.use(routes);
 app.use("/files", express.static(uploadConfig.UPLOADS_FOLDER));
@@ -23,14 +23,6 @@ app.use("/files", express.static(uploadConfig.UPLOADS_FOLDER));
 // app.get('/products/:id', function (req, res, next) {
 //     res.json({msg: 'This is CORS-enabled for all origins!'})
 //   })
-   
-
-
-
-
-
-
-
 
 
 app.use((error, request, response, next) => { 
@@ -49,5 +41,5 @@ app.use((error, request, response, next) => {
     })
 })
 
-const PORT = 3333;
+const PORT = process.env.PORT || 3333;
 app.listen(PORT, () => console.log(`Server is running on PORT ${PORT}`));
