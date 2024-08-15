@@ -50,6 +50,8 @@ export const Profile = styled.div`
 
     }
 
+    cursor: pointer;
+
 
 
 `;
