@@ -6,7 +6,7 @@ import GlobalStyle from './style/global.js';
 
 import theme from './style/theme.js'
 
-import { AuthProvider } from '../src/hooks/auth';
+import { AuthProvider } from '../src/hooks/auth'
 
 import { Routes } from './routes';
 
