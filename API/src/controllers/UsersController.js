@@ -1,29 +1,20 @@
 const { hash, compare } = require("bcryptjs");
-
 const AppError = require("../utils/AppError");
 
-const UserRepository = require("../repositories/userRepository");
 const sqliteConnection = require("../database/sqlite");
+const UserRepository = require("../repositories/UserRepository.js");
+const UserCreateService = require('../services/UserCreateService.js');
 
 class UsersController {
     async create(request, response) {
         const { name, email, password } = request.body;
 
         const userRepository = new UserRepository();
-   
-        const checkUserExists = await userRepository.findByEmail(email);
-
-        if (checkUserExists) {
-            throw new AppError("Usuario já existe");
-        }
-        
-        const hashedPassword = await hash(password, 8);
-
-        await userRepository.create({ name, email, password: hashedPassword})
+        const userCreateService = new UserCreateService(userRepository);
+        await userCreateService.execute({ name, email, password });
 
         return response.status(201).json();
     }
-
 
 
     async update(request, response) { 
@@ -75,6 +66,16 @@ class UsersController {
     }   
 }
 
+module.exports = UsersController;
+
+
+
+
+
+
+
+
+
 
 
 
@@ -89,5 +90,3 @@ class UsersController {
 Se precisar criar mais que 5 métodos é melhor criar um novo controller, 1 a 5 métodos apenas, essa é uma boa prática.
 */
 
-
-module.exports = UsersController;
